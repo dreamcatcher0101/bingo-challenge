@@ -1,0 +1,15 @@
+{
+  "name": "bingo-challenge",
+  "version": "1.0.0",
+  "description": "Bingo Challenge for The Focusrite Group",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://dreamcatcher0101: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@github.com/dreamcatcher0101/bingo-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
