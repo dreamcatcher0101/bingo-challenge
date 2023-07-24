@@ -1,4 +1,5 @@
 import { BingoCard, CalledNumbers } from "./types";
+import { convertToBingoData, readFileContent } from "./utils";
 
 export const checkBingo = (
   calledNumbers: CalledNumbers,
@@ -24,35 +25,18 @@ export const checkBingo = (
   return true;
 };
 
-const main = () => {
+const main = async () => {
   try {
-    let calledNumbers: CalledNumbers = [
-      7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22,
-      18, 20, 8, 19, 3, 26, 1,
-    ];
-    let bingoCard: BingoCard = [
-      [22, 13, 17, 11, 0],
-      [8, 2, 23, 4, 24],
-      [21, 9, 14, 16, 7],
-      [6, 10, 3, 18, 5],
-      [1, 12, 20, 15, 19],
-    ];
-    let result = checkBingo(calledNumbers, bingoCard);
-    console.log(result);
+    const fileContent = await readFileContent("data/2.txt");
+    const inputData = convertToBingoData(fileContent);
 
-    calledNumbers = [
-      7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22,
-      18, 20, 8, 19, 3, 26, 1,
-    ];
-    bingoCard = [
-      [22, 13, 17, 11, 0],
-      [8, 2, 23, 4, 24],
-      [21, 9, 14, 16, 7],
-      [6, 10, 3, 18, 5],
-      [1, 12, 20, 15, 27],
-    ];
-    result = checkBingo(calledNumbers, bingoCard);
-    console.log(result);
+    console.log(inputData.bingoCards);
+
+    const checkedResults = inputData.bingoCards.map((bingoCard) =>
+      checkBingo(inputData.calledNumbers, bingoCard)
+    );
+
+    console.log(checkedResults);
   } catch (err) {}
 };
 
